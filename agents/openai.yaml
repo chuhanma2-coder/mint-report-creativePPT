@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mint Report Creative PPT"
+  short_description: "统一Mint母版下的自由原生设计；支持个人制作与多人协作任务卡"
+  default_prompt: "请使用 $mint-report-creative-ppt，根据附件和已确认的页面指导Prompt，使用统一Mint母版制作内容完整、重点清楚、原生可编辑的管理汇报PPT。"

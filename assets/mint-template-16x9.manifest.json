@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "templateVersion": "mint-template-16x9/1",
+  "referenceFile": "Mint_PPT_16比9-reference.pptx",
+  "referenceSha256": "1909e527685acdc25e104b6722601827be46d29796d03ef589d8fc2e9568df90",
+  "templateFile": "Mint_PPT_16比9-template.pptx",
+  "templateSha256": "4d59e63bcaa6d2f6d2b96d1cf80822eb215f77104c89e7591c7e1c95259b947c",
+  "slideSizeEmu": "12192000,6858000",
+  "baseSlide": "slide4",
+  "automaticPageField": true,
+  "manualPageNumbers": false,
+  "layouts": [
+    "Mint｜封面与封底",
+    "Mint｜标题与正文",
+    "Mint｜两行标题与正文",
+    "Mint｜双栏内容",
+    "Mint｜章节页",
+    "Mint｜全幅图片",
+    "Mint｜空白页"
+  ],
+  "notes": "One clean native base slide. Duplicate it for output pages; preserve the automatic page field."
+}

@@ -1,0 +1,37 @@
+{
+  "themeVersion": "mint-template-16x9/1",
+  "template": {
+    "mode": "native-brand-shell",
+    "file": "Mint_PPT_16比9-template.pptx",
+    "referenceFile": "Mint_PPT_16比9-reference.pptx",
+    "automaticPageNumbers": true,
+    "contentSlotsLocked": false
+  },
+  "slide": { "width": 1280, "height": 720, "aspectRatio": "16:9", "headers": false, "footers": false, "pageNumbers": "automatic-field" },
+  "fonts": {
+    "cjk": "Microsoft YaHei",
+    "themeCjk": "Source Han Sans CN Regular",
+    "latin": "Aptos",
+    "templateInternal": ["思源黑体 CN Regular"],
+    "allowed": ["Microsoft YaHei", "微软雅黑", "Source Han Sans CN Regular", "思源黑体 CN Regular", "Aptos", "Arial"]
+  },
+  "palette": {
+    "page": "#F5F8F6", "paper": "#FFFFFF", "ink": "#18312A", "muted": "#60706A", "line": "#D8E4DF",
+    "mint": "#00866A", "mintLight": "#E7F5F0", "blue": "#1686A6", "blueLight": "#E8F4F8",
+    "orange": "#E98245", "orangeLight": "#FFF0E7", "coral": "#D95D4F", "coralLight": "#FBEAE7",
+    "purple": "#7161A8", "gold": "#C79A32", "neutral": "#87938E", "onDark": "#FFFFFF"
+  },
+  "semanticColors": { "actual": "#00866A", "target": "#7891A0", "risk": "#D95D4F", "history": "#87938E", "uncertainty": "#C79A32", "peerSeries": ["#1686A6", "#E98245"] },
+  "typographyPt": {
+    "coverTitle": [32, 46], "sectionTitle": [30, 40], "contentTitle": [26, 34], "denseTitle": [22, 30],
+    "heroMetric": [30, 46], "body": [17, 20], "denseBody": [16, 18], "supportBody": [15, 17],
+    "table": [14, 16], "chartLabel": [15, 18], "diagramNode": [15, 18], "diagramEdge": [13, 15], "caption": [10, 12]
+  },
+  "chartTypographyPt": { "axis": 17, "denseAxis": 15, "legend": 16, "dataLabel": 18, "denseDataLabel": 16 },
+  "guidance": {
+    "safeMarginPx": 40,
+    "titleAlignment": "Use a coherent left/top reference within the report, not a mandatory title box height.",
+    "shapeLanguage": "Restrained rules and borders; containers only when needed by the content. No default card count or layout. If the template has no matching diagram or page example, compose editable native objects using this same visual language rather than inventing a new style or rasterizing the page.",
+    "colorPolicy": "Use dark/light contrast and semantic emphasis. Do not cycle colors by component or use every color on every page. Labels or line styles must supplement color."
+  }
+}

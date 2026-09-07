@@ -1,0 +1,14 @@
+{
+  "name": "mint-report-creative-ppt",
+  "version": "0.1.0-rc.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/contracts.test.mjs",
+    "task-card": "node scripts/create-task-card.mjs",
+    "test:native": "node tests/native.e2e.mjs",
+    "test:template": "node tests/template.e2e.mjs",
+    "fingerprint": "node scripts/package-skill.mjs --fingerprint"
+  },
+  "engines": { "node": ">=20" }
+}
