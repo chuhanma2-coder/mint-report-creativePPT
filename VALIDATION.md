@@ -1,4 +1,4 @@
-# v0.1.0-rc.2 validation status
+# v0.1.0-rc.3 validation status
 
 ## Verified locally
 

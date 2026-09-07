@@ -1,6 +1,6 @@
 # Mint Report Creative PPT
 
-独立实验版 **0.1.0-rc.2**。根据完整原始材料与已确认的页面指导 Prompt，由 Agent 在统一 Mint 原生母版下自由设计可编辑 PPT；不调用原 `mint-report-ppt` 的固定布局链路。
+独立实验版 **0.1.0-rc.3**。根据完整原始材料与已确认的页面指导 Prompt，由 Agent 在统一 Mint 原生母版下自由设计可编辑 PPT；不调用原 `mint-report-ppt` 的固定布局链路。
 
 ## 与原版的区别
 
@@ -19,7 +19,7 @@
 
 ```text
 请从 https://github.com/chuhanma2-coder/mint-report-creativePPT
-安装 v0.1.0-rc.2 的 mint-report-creative-ppt Skill。
+安装 v0.1.0-rc.3 的 mint-report-creative-ppt Skill。
 仓库根目录就是 Skill，安装名称为 mint-report-creative-ppt。
 不要替换、修改或卸载 mint-report-ppt。
 安装后验证版本和运行时指纹，并确认 Presentations 依赖可用。
@@ -28,7 +28,7 @@
 维护者可使用自带 skill-installer：
 
 ```sh
-python install-skill-from-github.py --repo chuhanma2-coder/mint-report-creativePPT --ref v0.1.0-rc.2 --path . --name mint-report-creative-ppt
+python install-skill-from-github.py --repo chuhanma2-coder/mint-report-creativePPT --ref v0.1.0-rc.3 --path . --name mint-report-creative-ppt
 ```
 
 安装后下一轮对话即可使用。若同名目录已存在，先检查版本和本地修改，不直接覆盖。Release ZIP 是纯 Skill 运行资源，不含私有材料或历史 PPT。
@@ -37,7 +37,7 @@ python install-skill-from-github.py --repo chuhanma2-coder/mint-report-creativeP
 
 个人临时制作可以直接使用短 Prompt。多人正式协作建议使用四步流程：先做简化任务卡，再由撰写人让 AI 生成并确认详细页面指导 Prompt，随后套用同一母版制作，最后人工修改或重新生成。完整可复制 Prompt 见 [团队操作手册](references/team-workflow.md)。
 
-任务卡只统一：章节顺序、负责人、来源范围、汇报受众/目的、Skill与母版版本。它不规定页数和版式。真正保证合并后格式基本一致的是：**相同 Skill 版本 + 相同原生母版版本 + 相同品牌合同**。
+任务卡只统一：章节顺序、负责人、来源范围、汇报受众/目的、Skill与母版版本。它是防止多人重复、漏做、错序、拿错材料和版本不一致的轻量协作合同，不规定页数和版式。若团队已经用其他方式明确并共同确认这些信息，可以不用任务卡，但需要人工承担同样的协调与合并核对。真正保证合并后格式基本一致的是：**相同 Skill 版本 + 相同原生母版版本 + 相同品牌合同**。
 
 ## 个人制作的最简单 Prompt
 
