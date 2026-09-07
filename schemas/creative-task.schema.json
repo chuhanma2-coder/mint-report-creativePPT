@@ -4,7 +4,7 @@
   "title": "Mint Creative PPT collaboration task card",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "reportTitle", "audience", "purpose", "template", "chapters", "commonRequirements"],
+  "required": ["schemaVersion", "reportTitle", "template", "chapters", "commonRequirements"],
   "properties": {
     "schemaVersion": { "const": "creative-task-1.0" },
     "reportTitle": { "type": "string", "minLength": 1 },
@@ -25,14 +25,19 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["order", "title", "owner", "objective", "sourcePaths"],
+        "required": ["order", "title", "owner"],
         "properties": {
           "order": { "type": "integer", "minimum": 1 },
           "title": { "type": "string", "minLength": 1 },
           "owner": { "type": "string", "minLength": 1 },
           "objective": { "type": "string", "minLength": 1 },
+          "sourceType": { "const": "inline-outline" },
           "sourcePaths": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
-        }
+        },
+        "anyOf": [
+          { "required": ["sourceType"] },
+          { "required": ["sourcePaths"] }
+        ]
       }
     },
     "commonRequirements": {

@@ -57,6 +57,18 @@ test('team task card is simple scope coordination, not a pagination template',()
  assert.deepEqual(taskCardIssues(card),[]);assert.equal(card.chapters[0].sectionId,undefined);assert.equal(card.chapters[0].pageCount,undefined);
  const bad=structuredClone(card);bad.chapters[0].layout='three-cards';assert.ok(taskCardIssues(bad).includes('TASK_CARD_MUST_NOT_CONTROL_PAGINATION_OR_LAYOUT'));
 });
+test('outline and owner mapping are sufficient task-card input',()=>{
+ const card=createTaskCard({chapters:[
+  {order:1,title:'肯尼亚牌照进展',owner:'甲'},
+  {order:2,title:'风险',owner:'乙'}
+ ]});
+ assert.deepEqual(taskCardIssues(card),[]);
+ assert.equal(card.reportTitle,'管理层汇报');
+ assert.equal(card.audience,undefined);assert.equal(card.purpose,undefined);
+ assert.equal(card.chapters[0].objective,undefined);
+ assert.equal(card.chapters[0].sourceType,'inline-outline');
+ assert.equal(card.chapters[0].sourcePaths,undefined);
+});
 test('docx embedded charts and objects require explicit reviewed export',async t=>{
  const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'creative-docx-'));t.after(()=>fs.rmSync(tmp,{recursive:true,force:true}));
  const require=createRequire(path.join(process.env.RUNTIME_NODE_MODULES,'package.json')),JSZip=require('jszip'),zip=new JSZip();
