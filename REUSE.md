@@ -1,6 +1,6 @@
 # Reused code provenance
 
-The native reference deck `assets/Mint_PPT_16比9-reference.pptx` was copied byte-for-byte from the user-supplied `Mint_PPT_16比9.pptx`. `assets/Mint_PPT_16比9-template.pptx` is a mechanically cleaned one-slide derivative that preserves the original theme, master and layouts while replacing the sample manual number with a PowerPoint automatic slide-number field. It is a brand shell, not copied business content or a fixed page-template library.
+The native reference deck `assets/mint-ppt-16x9-reference.pptx` was copied byte-for-byte from the user-supplied `Mint_PPT_16比9.pptx`. `assets/mint-ppt-16x9-template.pptx` is a mechanically cleaned one-slide derivative that preserves the original theme, master and layouts while replacing the sample manual number with a PowerPoint automatic slide-number field. It is a brand shell, not copied business content or a fixed page-template library. ASCII repository filenames avoid ZIP and Windows code-page failures; the original supplied name is recorded here only as provenance.
 
 Copied with the repository owner's authorization from `chuhanma2-coder/mint-report-ppt`, commit `727fd36ad22da184b51a5c811561f785e64576ca` (runtime `0.4.0-rc.6-design-dev.9`). The old repository is read-only for this work. No business materials, historical PPTs, private session logs or old task build scripts are distributed.
 

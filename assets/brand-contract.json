@@ -2,8 +2,8 @@
   "themeVersion": "mint-template-16x9/1",
   "template": {
     "mode": "native-brand-shell",
-    "file": "Mint_PPT_16比9-template.pptx",
-    "referenceFile": "Mint_PPT_16比9-reference.pptx",
+    "file": "mint-ppt-16x9-template.pptx",
+    "referenceFile": "mint-ppt-16x9-reference.pptx",
     "automaticPageNumbers": true,
     "contentSlotsLocked": false
   },

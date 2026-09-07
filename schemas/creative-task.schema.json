@@ -16,7 +16,7 @@
       "required": ["id", "file"],
       "properties": {
         "id": { "const": "mint-template-16x9/1" },
-        "file": { "const": "Mint_PPT_16比9-template.pptx" }
+        "file": { "const": "mint-ppt-16x9-template.pptx" }
       }
     },
     "chapters": {

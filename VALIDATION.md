@@ -3,7 +3,7 @@
 ## Verified locally
 
 - Contract unit tests pass, including canonical-source mutation, visible fact coverage, human presentation copy, image fine-text review, font/collision checks, capacity evidence, simple team task cards and DOCX embedded-object blocking.
-- The supplied `Mint_PPT_16比9.pptx` was preserved as a reference asset and converted to a clean one-slide native authoring template without changing its theme/master/layout collection.
+- The supplied `Mint_PPT_16比9.pptx` was preserved as `mint-ppt-16x9-reference.pptx` and converted to a clean one-slide native authoring template without changing its theme/master/layout collection. ASCII asset names are used for cross-platform ZIP installation.
 - Importing the clean template, duplicating its base slide and exporting a three-page PPTX retains one real PowerPoint `slidenum` field on every page and no manual page-number textbox.
 - Template output checks verify 16:9 dimensions, native master/layout presence, theme identity and automatic page-number fields.
 - The bundled Presentations reference-font inspector could not parse this supplied PPTX reliably, so font consistency is enforced with an explicit allowed family set plus final output font inspection; template theme/master identity is checked independently.

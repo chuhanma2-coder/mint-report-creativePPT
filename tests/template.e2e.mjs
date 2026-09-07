@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import {templateOutputIssues,templatePackage} from '../scripts/lib/template-contract.mjs';
-const template=path.resolve('assets/Mint_PPT_16比9-template.pptx');
+const template=path.resolve('assets/mint-ppt-16x9-template.pptx');
 const require=createRequire(path.join(process.env.RUNTIME_NODE_MODULES,'package.json'));
 const {FileBlob,PresentationFile}=await import(pathToFileURL(require.resolve('@oai/artifact-tool')).href);
 const presentation=await PresentationFile.importPptx(await FileBlob.load(template));

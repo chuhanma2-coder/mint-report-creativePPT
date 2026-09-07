@@ -34,13 +34,13 @@ Optional `explicitSlideCount` must reflect an explicit user requirement. Each re
 
 ## 3. Create freely inside the shared native brand shell
 
-Write `RUN_DIRECTORY/build.mjs`, using Presentations `@oai/artifact-tool` and its finalizer. Import `assets/Mint_PPT_16比9-template.pptx` with `PresentationFile.importPptx`, keep its clean base slide, and duplicate that slide for additional pages. Do not use `Presentation.create()` for normal Skill output. This preserves the native Mint theme/master and the real `slidenum` field named `Mint automatic page number`.
+Write `RUN_DIRECTORY/build.mjs`, using Presentations `@oai/artifact-tool` and its finalizer. Import `assets/mint-ppt-16x9-template.pptx` with `PresentationFile.importPptx`, keep its clean base slide, and duplicate that slide for additional pages. Do not use `Presentation.create()` for normal Skill output. This preserves the native Mint theme/master and the real `slidenum` field named `Mint automatic page number`.
 
 Minimal opening pattern:
 
 ```js
 const presentation = await PresentationFile.importPptx(
-  await FileBlob.load('/ABSOLUTE/SKILL/PATH/assets/Mint_PPT_16比9-template.pptx')
+  await FileBlob.load('/ABSOLUTE/SKILL/PATH/assets/mint-ppt-16x9-template.pptx')
 );
 const firstSlide = presentation.slides.items[0];
 const nextSlide = firstSlide.duplicate();

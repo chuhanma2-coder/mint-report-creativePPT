@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "templateVersion": "mint-template-16x9/1",
-  "referenceFile": "Mint_PPT_16比9-reference.pptx",
+  "referenceFile": "mint-ppt-16x9-reference.pptx",
   "referenceSha256": "1909e527685acdc25e104b6722601827be46d29796d03ef589d8fc2e9568df90",
-  "templateFile": "Mint_PPT_16比9-template.pptx",
+  "templateFile": "mint-ppt-16x9-template.pptx",
   "templateSha256": "4d59e63bcaa6d2f6d2b96d1cf80822eb215f77104c89e7591c7e1c95259b947c",
   "slideSizeEmu": "12192000,6858000",
   "baseSlide": "slide4",

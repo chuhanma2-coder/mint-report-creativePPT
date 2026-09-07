@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const text=value=>typeof value==='string'&&Boolean(value.trim());
-export const defaultTemplate={id:'mint-template-16x9/1',file:'Mint_PPT_16比9-template.pptx'};
+export const defaultTemplate={id:'mint-template-16x9/1',file:'mint-ppt-16x9-template.pptx'};
 export const defaultCommonRequirements={businessFactsInBody:true,appendixAllowed:false,automaticPageNumbers:true,bottomNotes:'only-if-business-critical-or-explicit'};
 
 export function taskCardIssues(card) {
