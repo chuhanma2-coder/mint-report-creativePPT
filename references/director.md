@@ -31,6 +31,8 @@ Use the shared native Mint template as a style prior. Its layouts and sample gra
 
 ## Copy and meaning
 
+Ordinary body-page displayCopy.title is a concise single-line subject or supported conclusion. Preserve forecast, scope and conditions; relocate unique details into visible nearby body copy instead of reducing title font size. No automatic subtitle strip. Literal user-locked wording that cannot fit requires clarification, not truncation.
+
 Every component of source text must be present in the reviewed paraphrase or another visible carrier. `source-model` `requiredComponents` separates subject/value/unit/time/status/condition/scope/detail. A reviewer checks the completeness of that inventory; deterministic matching does not prove semantic equivalence. A source paragraph may cover several objects and facts. Avoid repeated raw paragraphs plus charts plus tables containing the same data.
 
 For entity comparison, names, distinguishing identity, real key metrics, concise explanation and optional status are useful guidance, not required fields or slots. Never invent a metric for the sake of symmetrical profiles. Long English words, number-unit pairs, ranges and forecast qualifiers must remain readable together.

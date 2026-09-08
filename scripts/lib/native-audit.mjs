@@ -7,6 +7,8 @@ import {canonicalCoverage} from './canonical-source-ledger.mjs';
 import {copyTextIssues} from './presentation-copy.mjs';
 import {imageReadabilityIssues} from './image-readability.mjs';
 import {textFloorPt} from './typography-contract.mjs';
+import {brandLayoutIssues} from './template-contract.mjs';
+import {theme} from './config.mjs';
 import {digest} from './review-evidence.mjs';
 import {hashFile,readJson,nonempty} from './creative-contract.mjs';
 
@@ -48,7 +50,12 @@ export async function auditNativeContent(file,inspection,map,{canonical,source,b
     if(!(slide.storyIds||[slide.storyId]).every(id=>knownStories.has(id))) issues.push('UNKNOWN_STORY');
     if(hashFile(actual.renderedImage)!==actual.imageSha256||hashFile(actual.layoutFile)!==actual.layoutSha256) issues.push('INSPECTION_FILES_CHANGED');
     const layout=readJson(actual.layoutFile),objects=nativeObjects(xml),names=new Set();
+    if(slide.pageKind&&!['body','cover','section','full-image'].includes(slide.pageKind)) issues.push('PAGE_KIND_INVALID: '+slide.id);
+    if((!slide.pageKind||slide.pageKind==='body')&&!brief.authoring?.file&&brief.authoring?.mode!=='edit') issues.push(...brandLayoutIssues(layout).map(x=>slide.id+': '+x));
     for(const o of objects) {
+      if(o.name==='Mint content title'&&!brief.authoring?.file) {
+        if(!/<a:(?:rPr|defRPr)\b[^>]*\bb="1"/.test(o.xml)||!o.xml.includes(theme.bodyShell.title.color.slice(1))||!o.xml.includes(theme.bodyShell.title.fontFamily)) issues.push('BODY_TITLE_STYLE: '+slide.id);
+      }
       if(!o.name||names.has(o.name)) issues.push(`OBJECT_NAME_NOT_UNIQUE: ${slide.id}/${o.name}`);names.add(o.name);
       issues.push(...copyTextIssues(o.text,brief).map(k=>`${slide.id}/${o.name}: ${k}`));
       if(o.text.trim()&&/<a:normAutofit\b/.test(o.xml)) issues.push(`AUTO_SHRINK_ENABLED: ${o.name}`);

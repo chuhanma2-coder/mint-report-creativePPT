@@ -4,6 +4,8 @@ The legacy source/copy/native checks are copied and reused. They are necessary, 
 
 ## Common hard requirements
 
+- Check the frozen style authority: rebuilding defaults to the current template; editing preserves the current deck. Ordinary builtin body pages require the common background and single-line 32pt title, no duplicate brand/title objects or inherited prompt placeholders. Use existing layout/native checks plus the same final visual review, no extra screenshot/model round. Verify logo appearance and divider details visually; geometric checks alone cannot prove their fidelity. Report real PowerPoint edit/slideshow/merge/reopen as pending without platform evidence.
+
 - Raw inventory is recomputed; canonical IDs/anchors and every source unit survive. All business facts, units, qualifiers, scope, conditions and relationships are visible in body content. No unapproved omissions or notes-only coverage.
 - Actual native objects back every evidence reference; hidden metadata/alt text, blank shapes, tiny text or a whole-page bitmap do not count. Native table cells and native chart caches/labels are checked against source-reviewed expected data.
 - Correct dimensions and embedded assets; no external media, auto-shrink or accidental page chrome. Body/table/chart/edge floor sizes apply to actual exported text, not just authored values. Fine source images need region-level review.

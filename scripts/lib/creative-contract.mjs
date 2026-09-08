@@ -5,7 +5,7 @@ import {verifyCanonicalLedger} from './canonical-source-ledger.mjs';
 import {runtimeFingerprint} from './runtime-fingerprint.mjs';
 import {skillRoot,mintTemplatePath,mintReferencePath,templateManifest,theme} from './config.mjs';
 import {copyTextIssues} from './presentation-copy.mjs';
-import {templatePackage} from './template-contract.mjs';
+import {templatePackage,styleAuthority} from './template-contract.mjs';
 
 export const readJson=file=>JSON.parse(fs.readFileSync(file,'utf8'));
 export const hashFile=file=>digest(fs.readFileSync(file));
@@ -22,8 +22,8 @@ const strings=v=>typeof v==='string'?[v]:Array.isArray(v)?v.flatMap(strings):v&&
 export function briefIssues(brief,canonical,source) {
   const issues=[],known=new Set(canonical.units.map(u=>u.id)),covered=new Set();
   if(!nonempty(brief.audience)||!nonempty(brief.goal)||!brief.fonts?.length||brief.fonts.some(f=>!nonempty(f))) issues.push('BRIEF_CONTEXT_REQUIRED');
-  if(brief.fonts?.some(f=>!theme.fonts.allowed.includes(f))) issues.push('BRAND_FONT_NOT_ALLOWED');
-  if(brief.template?.id!=='mint-template-16x9/1'||brief.template?.mode!=='native-brand-shell') issues.push('MINT_TEMPLATE_BRIEF_REQUIRED');
+  if(!brief.authoring?.file&&brief.fonts?.some(f=>!theme.fonts.allowed.includes(f))) issues.push('BRAND_FONT_NOT_ALLOWED');
+  if(!brief.authoring?.file&&(brief.template?.id!=='mint-template-16x9/1'||brief.template?.mode!=='native-brand-shell')) issues.push('MINT_TEMPLATE_BRIEF_REQUIRED');
   if(!brief.stories?.length) issues.push('BRIEF_STORIES_REQUIRED');
   const ids=new Set();
   for(const s of brief.stories||[]) {
@@ -58,15 +58,20 @@ export async function checkRun(run,{requirePreflight=false}={}) {
   if(runtime.status!=='verified-release') issues.push('RUNTIME_NOT_VERIFIED');
   if(hashFile(mintTemplatePath)!==templateManifest.templateSha256||hashFile(mintReferencePath)!==templateManifest.referenceSha256) issues.push('MINT_TEMPLATE_IDENTITY_CHANGED');
   const template=await templatePackage(mintTemplatePath);
-  if(template.slideSizeEmu!==templateManifest.slideSizeEmu||template.slides.length!==1||template.slides[0].automaticFields!==1||template.slides[0].manualPageNumberNames.length) issues.push('MINT_TEMPLATE_CONTRACT_INVALID');
+  if(template.slideSizeEmu!==templateManifest.slideSizeEmu||template.slides.length!==1||template.slides[0].automaticFields!==1||template.slides[0].manualPageNumberNames) issues.push('MINT_TEMPLATE_CONTRACT_INVALID');
+  const authority=styleAuthority(brief.authoring,mintTemplatePath);
+  authority.file=path.resolve(run,authority.file);
+  authority.sha256=hashFile(authority.file);
+  if(authority.originText&&!fs.readFileSync(path.join(run,'prompt.txt'),'utf8').includes(authority.originText)) issues.push('STYLE_INSTRUCTION_NOT_IN_PROMPT');
   const files=['canonical-source.json','source-model.json','brief.json','prompt.txt'];
   const hashes=Object.fromEntries(files.map(f=>[f,hashFile(path.join(run,f))]));
   if(hashes['prompt.txt']!==manifest.promptSha256) issues.push('ORIGINAL_PROMPT_CHANGED');
   if(canonical.sha256!==manifest.canonicalSha256) issues.push('CANONICAL_IDENTITY_CHANGED');
   if(requirePreflight) {
     const receipt=readJson(path.join(run,'preflight.json'));
-    if(JSON.stringify(receipt.hashes)!==JSON.stringify(hashes)||receipt.runtimeSha256!==runtime.sha256||receipt.status!=='pass') issues.push('PREFLIGHT_STALE_OR_FAILED');
+    if(JSON.stringify(receipt.hashes)!==JSON.stringify(hashes)||receipt.runtimeSha256!==runtime.sha256||receipt.status!=='pass'||JSON.stringify(receipt.styleAuthority)!==JSON.stringify(authority)) issues.push('PREFLIGHT_STALE_OR_FAILED');
   }
   if(issues.length) throw new Error(issues.join('\n'));
-  return {run,canonical,source,brief,manifest,runtime,hashes,templatePath:mintTemplatePath,referencePath:mintReferencePath,templateManifest};
+  const selectedManifest=authority.builtin?templateManifest:{templateVersion:'user-reference',templateSha256:authority.sha256,referenceSha256:authority.sha256};
+  return {run,canonical,source,brief,manifest,runtime,hashes,styleAuthority:authority,templatePath:authority.file,referencePath:authority.builtin?mintReferencePath:authority.file,templateManifest:selectedManifest};
 }

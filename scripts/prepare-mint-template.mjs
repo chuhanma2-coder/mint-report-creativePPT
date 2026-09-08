@@ -28,7 +28,7 @@ const slideRels=await zip.file('ppt/slides/_rels/slide4.xml.rels').async('string
 zip.file('ppt/slides/_rels/slide4.xml.rels',slideRels.replace(/<Relationship\b[^>]*Type="[^"]*\/notesSlide"[^>]*\/?\s*>/g,''));
 let slide=await zip.file(targetSlide).async('string');
 slide=slide.replace(/<p:sp>([\s\S]*?)<\/p:sp>/g,(whole,body)=>{
-  if(/<p:ph\b/.test(body)) return whole.replace(/<a:t>[\s\S]*?<\/a:t>/g,'<a:t></a:t>');
+  if(/<p:ph\b/.test(body)) return '';
   if(/name="Mint page marker line 4"/.test(body)) return whole.replace('Mint page marker line 4','Mint page marker line');
   if(/name="Mint page number 4"/.test(body)) {
     const fieldId='{6F312AFB-B202-4ED7-8496-47B56973E7D4}';
@@ -44,6 +44,13 @@ types=types.replace(/<Override\b[^>]*PartName="\/(?:ppt\/slides\/slide(?!4\.xml)
 zip.file('[Content_Types].xml',types);
 const app=await zip.file('docProps/app.xml')?.async('string');
 if(app) zip.file('docProps/app.xml',app.replace(/<Slides>\d+<\/Slides>/,'<Slides>1</Slides>').replace(/<Notes>\d+<\/Notes>/,'<Notes>0</Notes>'));
+// Clean generating layouts as well: edit/reopen must not resurrect prompts.
+// The untouched reference PPT retains all original examples and typography.
+for(const name of Object.keys(zip.files)) if(/^ppt\/(?:slideLayouts|slideMasters)\/[^/]+\.xml$/.test(name)) {
+  const xml=await zip.file(name).async('string');
+  zip.file(name,xml.replace(/<p:sp\b[^>]*>[\s\S]*?<\/p:sp>/g,shape=>
+    /<p:ph\b/.test(shape)&&!/<a:fld\b[^>]*type="slidenum"/.test(shape)?'':shape));
+}
 const result=await zip.generateAsync({type:'nodebuffer',compression:'DEFLATE',compressionOptions:{level:6}});
 fs.mkdirSync(path.dirname(output),{recursive:true});fs.writeFileSync(output,result);
 const manifest={schemaVersion:1,templateVersion:'mint-template-16x9/1',referenceFile:path.basename(source),referenceSha256:hash(bytes),templateFile:path.basename(output),templateSha256:hash(result),slideSizeEmu:'12192000,6858000',baseSlide:'slide4',automaticPageField:true,manualPageNumbers:false,layouts:['Mint｜封面与封底','Mint｜标题与正文','Mint｜两行标题与正文','Mint｜双栏内容','Mint｜章节页','Mint｜全幅图片','Mint｜空白页'],notes:'One clean native base slide. Duplicate it for output pages; preserve the automatic page field.'};

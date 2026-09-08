@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/contracts.test.mjs",
+    "test": "node --test tests/contracts.test.mjs tests/brand-shell.test.mjs",
     "task-card": "node scripts/create-task-card.mjs",
     "test:native": "node tests/native.e2e.mjs",
     "test:template": "node tests/template.e2e.mjs",

@@ -15,6 +15,8 @@ const candidatePath=path.resolve(candidateArg),finalPath=path.resolve(finalArg);
 insideRun(run,candidatePath);insideRun(run,finalPath);assertNew(finalPath);
 const buildFile=path.join(run,'build.mjs'),mapFile=path.join(run,'evidence-map.json'),map=readJson(mapFile);
 if(!fs.existsSync(buildFile)) throw new Error('TASK_BUILD_SCRIPT_REQUIRED');
+const preTemplate=await templateOutputIssues(candidatePath,{templateFile:templatePath,mode:context.styleAuthority.mode,pageKinds:map.slides.map(s=>s.pageKind||'body')});
+if(!preTemplate.passed) throw new Error(preTemplate.issues.join('\n'));
 const skill=process.env.PRESENTATIONS_SKILL_DIR,python=process.env.RUNTIME_PYTHON;
 if(!skill||!python) throw new Error('Load workspace dependencies and set PRESENTATIONS_SKILL_DIR / RUNTIME_PYTHON');
 const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
@@ -34,7 +36,7 @@ await finalizePresentation({workspaceDir:run,candidatePath,finalPath,pythonExecu
 let inspection=cachedInspection?readJson(cachedInspection):null;
 if(inspection?.pptxSha256!==hashFile(finalPath)) inspection=await inspectNative(finalPath,finalPath+'.native-inspection');
 const audit=await auditNativeContent(finalPath,inspection,map,context);
-const templateAudit=await templateOutputIssues(finalPath,{templateFile:templatePath,requireAutomaticPageNumbers:true});
+const templateAudit=await templateOutputIssues(finalPath,{templateFile:templatePath,requireAutomaticPageNumbers:true,mode:context.styleAuthority.mode,pageKinds:map.slides.map(s=>s.pageKind||'body')});
 audit.issues=[...new Set([...audit.issues,...templateAudit.issues])];
 audit.passed=!audit.issues.length;
 audit.pptxSha256=hashFile(finalPath);audit.runtime=runtime;audit.finalizerReceipt=receiptPath;

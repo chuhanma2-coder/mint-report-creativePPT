@@ -1,5 +1,17 @@
 # Native authoring and commands
 
+## 本次样式权威与普通正文页
+
+先在现有 brief.json 中记录 authoring.mode：create（新建）、rebuild（按当前Skill重做）、edit（修改当前PPT）。用户说“调用当前Skill重做”默认 rebuild，不继承历史稿背景、布局或脚本；已确认的业务修订仍保留。只有 edit 或用户明确要求保留旧样式／指定另一母版时，记录 authoring.file（绝对路径）和 authoring.originText（本次原话）。preflight 冻结该文件指纹，变化后重新检查。缺省为当前内置母版；无需任务卡、新表单或新增模型调用。当前PPT的内容权威不自动等于重做时的样式权威。
+
+内置母版普通正文页调用 nativePages(count,{templatePath}) 和 bodyHeader(slide,displayCopy.title)，来自 scripts/lib/native-basics.mjs；先复制所有空白页，再写内容。bodyHeader 仅设置背景与单行标题，不重画母版的Logo、分隔线或页码。使用返回的 bodyTop/bodyBottom 作为保护边界，正文布局完全自由。编辑旧稿或明确自定义母版时不调用内置 bodyHeader，不强制换肤；依据当前参考PPT核对标题与品牌格式。
+
+普通正文主标题必须单行：精炼概括，不缩字、不横向压缩、不裁切。移出的独有事实及条件放入就近正文，不自动加副标题或说明框。用户要求逐字保留的长标题无法单行时，报告冲突并请求选择。标题固定32pt、母版字体与颜色；实际换行由已有layout检查，不按字符数估算。不得用 denseTitle 降低主标题字号。必要副标题作为正文顶部的可读辅助内容，无副标题不留空槽。
+
+基础格式只约束普通正文页的整页背景、标题、品牌与页码。evidence-map.slides 的 pageKind 默认为 body；真实封面、章节过渡、全幅图片页可记录 cover、section、full-image，由已有独立审阅核对，不能用这些标签逃避正文检查。局部色块、风险强调、图表系列、关系图及构图自由；模板没有的表达可用相同视觉语言组合原生对象，不新增业务模板、不规定图表配额、不强制等大卡片。关系是否清楚由已有独立审阅判断，不能仅凭用了流程图就通过。
+
+常规输出复用现有对象/layout/渲染检查背景、单行标题、重复品牌、占位提示和保护区；最终视觉审阅同时检查Logo内容、渐变线、标题裁切、局部遮挡与新图形协调性。XML检查不能证明所有视觉问题。自定义母版和旧稿编辑按本次参考逐页核对，不把内置规则用于强制改造旧稿。
+
 Load the available Presentations Skill and `load_workspace_dependencies`. Set `RUNTIME_NODE`, `RUNTIME_NODE_MODULES`, `RUNTIME_BIN_DIR`, `RUNTIME_PYTHON`, and `PRESENTATIONS_SKILL_DIR` to discovered paths. No substitute dependencies. Node 20+; JSZip and `@oai/artifact-tool` come from the bundle. Read Presentations implementation, native-evidence and finalization guidance when applicable.
 
 ## 1. Freeze sources

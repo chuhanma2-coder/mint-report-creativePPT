@@ -30,9 +30,9 @@ const family='Arial';
 writeJson(path.join(run,'brief.json'),{audience:'开发验收',goal:'检查基础适配器',fonts:[family],template:{id:'mint-template-16x9/1',mode:'native-brand-shell'},explicitSlideCount:1,stories:[{id:'s',sourceRefs:ids,message:'原生对象保留数据',firstFocus:'投入与条件',composition:'左侧自然短表，右侧原生数据图',emphasis:'条件与数值可读',displayCopy:{title:'原生对象验收',body:source.sourceUnits[0].text}}],requirements:[]});
 cli('preflight.mjs',[run]);
 fs.copyFileSync(new URL(import.meta.url),path.join(run,'build.mjs'));
-const p=await PresentationFile.importPptx(await FileBlob.load(mintTemplatePath)),s=p.slides.items[0];s.background.fill='#F5F8F7';
-const t=s.shapes.add({geometry:'textbox',position:{left:50,top:42,width:1180,height:65},fill:'none',line:{fill:'none',width:0}});
-t.name='headline';t.text=source.sourceUnits[0].text;t.text.style={typeface:family,fontSize:28,bold:true,color:'#10362E',autoFit:'none'};
+const p=await PresentationFile.importPptx(await FileBlob.load(mintTemplatePath)),s=p.slides.items[0];s.background.fill='#FBFCF8';
+const t=s.shapes.add({geometry:'textbox',position:{left:48,top:48,width:1184,height:56},fill:'none',line:{fill:'none',width:0}});
+t.name='Mint content title';t.text=source.sourceUnits[0].text;t.text.style={typeface:'思源黑体 CN Regular',fontSize:32*96/72,bold:true,color:'#12695D',autoFit:'none',insets:{left:0,right:0,top:0,bottom:0}};
 const table=s.tables.add({rows:3,columns:2,left:60,top:185,width:360,height:180,columnWidths:[200,160],values:[['项目','金额'],['A',120],['B',80]]});table.name='costs';
 for(let r=0;r<3;r++) for(let c=0;c<2;c++){const cell=table.getCell(r,c);cell.text.style={typeface:family,fontSize:24,color:'#10362E',autoFit:'none'};cell.fill=r===0?'#DDEFE8':'#FFFFFF';}
 const font={typeface:family,fontSize:24};
